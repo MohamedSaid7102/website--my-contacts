@@ -1,3 +1,5 @@
+const pageHeader = document.querySelector('.page-header');
+const avatar = document.querySelector('.avatar');
 const themeToggle = document.getElementById('theme-toggle');
 const themeToggleStar = document.querySelector('.toggle__star');
 const themeToggleCircle = document.querySelector('.toggle__circle');
@@ -83,3 +85,21 @@ function setRootTheme(theme) {
   if (typeof theme !== 'string') throw TypeError('Pass a valid theme');
   document.documentElement.setAttribute('data-theme', theme);
 }
+
+// Scroll observer
+
+function showNav(entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) {
+    pageHeader.classList.add('show-header');
+  } else {
+    pageHeader.classList.remove('show-header');
+  }
+}
+
+const observer = new IntersectionObserver(showNav, {
+  root: null,
+  threshold: 1,
+});
+
+observer.observe(avatar);
