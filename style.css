@@ -1,0 +1,203 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 200ms ease-in-out;
+}
+
+html,
+body {
+  transition: initial; /** reset transition to get a smooth resizing */
+}
+
+html {
+  font-size: 62.5%; /** 1rem = 10px */
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+:root[theme='dark'] {
+  --primary-txt-clr: #eee;
+  --hilight-primary-txt-clr: #fff;
+  --fade-primary-txt-clr: #bbb;
+
+  --secondary-clr: #222;
+  --hilight-secondary-clr: #111;
+  --fade-secondary-clr: #333;
+}
+:root[theme='light'] {
+  --primary-txt-clr: #222;
+  --hilight-primary-txt-clr: #111;
+  --fade-primary-txt-clr: #333;
+}
+
+body {
+  min-height: 100vh;
+  font: 2rem/1.5 -apple-system, 'Helvetica Neue', sans-serif;
+  color: #eee;
+  /* overflow-x: hidden; */
+}
+
+body::after,
+body::before {
+  width: 100%;
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+body::after {
+  filter: blur(45px);
+  background-image: url('/assets/images/icon.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 150%;
+
+  z-index: -2;
+}
+
+body::before {
+  z-index: -1;
+}
+
+/** Light theme && fallback for default */
+:root[theme='light'] body::before,
+body::before {
+  opacity: 0.5;
+  background-size: 100% 100%;
+  background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
+    0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  background-image: radial-gradient(
+      18% 28% at 24% 50%,
+      #cefaffff 7%,
+      #073aff00 100%
+    ),
+    radial-gradient(18% 28% at 18% 71%, #ffffff59 6%, #073aff00 100%),
+    radial-gradient(70% 53% at 36% 76%, #73f2ffff 0%, #073aff00 100%),
+    radial-gradient(42% 53% at 15% 94%, #ffffffff 7%, #073aff00 100%),
+    radial-gradient(42% 53% at 34% 72%, #ffffffff 7%, #073aff00 100%),
+    radial-gradient(18% 28% at 35% 87%, #ffffffff 7%, #073aff00 100%),
+    radial-gradient(31% 43% at 7% 98%, #ffffffff 24%, #073aff00 100%),
+    radial-gradient(21% 37% at 72% 23%, #d3ff6d9c 24%, #073aff00 100%),
+    radial-gradient(35% 56% at 91% 74%, #8a4ffff5 9%, #073aff00 100%),
+    radial-gradient(74% 86% at 67% 38%, #6dffaef5 24%, #073aff00 100%),
+    linear-gradient(125deg, #4eb5ffff 1%, #4c00fcff 100%);
+}
+
+:root[theme='dark'] body::before {
+  opacity: 1;
+
+  background-image: radial-gradient(
+    75% 75% at 50% 50%,
+    #0000009f 0%,
+    #000205 100%
+  );
+}
+
+/* Wrapper */
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+
+  width: 100%;
+  max-width: 700px;
+  margin: 7rem auto 0;
+}
+
+/* Header */
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.main-wrapper {
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+.main-header .avatar {
+  max-width: 110px;
+}
+
+.main-header {
+  text-align: center;
+}
+
+.main-header .titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.main-header .title {
+  font-size: 2.5rem;
+  color: var(--hilight-primary-txt-clr);
+  font-weight: 500;
+}
+
+.main-header .sub-title {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--fade-primary-txt-clr);
+}
+
+/* Main Start */
+/* Links Wrap Start */
+.links-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.link {
+  color: var(--primary-txt-clr);
+  background-color: var(--hilight-secondary-clr);
+  text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 500px;
+  padding: 0.2em 0.5em;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(60, 64, 67, 0.412) 0px 4px 5px 3px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  transition: box-shadow 200ms ease-in-out;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--hilight-primary-txt-clr);
+  box-shadow: none;
+}
+.link:focus-visible {
+  outline: 2px dotted #fff;
+  outline-offset: 7px;
+}
+
+.link .link__txt {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.link .link__icon {
+  display: grid;
+  place-items: center;
+}
+/* Links Wrap End */
+/* Main End */
