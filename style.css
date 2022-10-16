@@ -21,7 +21,8 @@ video {
   max-width: 100%;
 }
 
-:root[theme='dark'] {
+:root[theme='dark'],
+:root {
   --primary-txt-clr: #eee;
   --hilight-primary-txt-clr: #fff;
   --fade-primary-txt-clr: #bbb;
@@ -34,40 +35,36 @@ video {
   --primary-txt-clr: #222;
   --hilight-primary-txt-clr: #111;
   --fade-primary-txt-clr: #333;
+
+  --secondary-clr: #eee;
+  --hilight-secondary-clr: #fff;
+  --fade-secondary-clr: #bbb;
 }
 
 body {
-  min-height: 100vh;
   font: 2rem/1.5 -apple-system, 'Helvetica Neue', sans-serif;
-  color: #eee;
-  /* overflow-x: hidden; */
+  color: var(--primary-txt-clr);
+  min-height: max-content;
 }
 
-body::after,
-body::before {
+.background-effect {
+  position: fixed;
   width: 100%;
-  content: '';
-  position: absolute;
+  height: 100%;
   inset: 0;
-}
-
-body::after {
   filter: blur(45px);
   background-image: url('/assets/images/icon.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 150%;
+  background-size: 100%;
 
-  z-index: -2;
+  z-index: 0;
+}
+.background-effect::after {
+  content: '';
 }
 
-body::before {
-  z-index: -1;
-}
-
-/** Light theme && fallback for default */
-:root[theme='light'] body::before,
-body::before {
+:root[theme='light'] .background-effect::after {
   opacity: 0.5;
   background-size: 100% 100%;
   background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
@@ -89,7 +86,10 @@ body::before {
     linear-gradient(125deg, #4eb5ffff 1%, #4c00fcff 100%);
 }
 
-:root[theme='dark'] body::before {
+:root[theme='dark'] .background-effect::after,
+.background-effect::after {
+  position: fixed;
+  inset: -100px;
   opacity: 1;
 
   background-image: radial-gradient(
@@ -97,6 +97,7 @@ body::before {
     #0000009f 0%,
     #000205 100%
   );
+  z-index: 2;
 }
 
 /* Wrapper */
@@ -186,7 +187,7 @@ body::before {
   box-shadow: none;
 }
 .link:focus-visible {
-  outline: 2px dotted #fff;
+  outline: 4px dotted var(--hilight-primary-txt-clr);
   outline-offset: 7px;
 }
 
